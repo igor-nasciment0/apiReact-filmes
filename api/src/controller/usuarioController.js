@@ -6,7 +6,7 @@ const endPoints = Router();
 
 endPoints.post('/usuario/login', async (req, resp) => {
         try{
-            let [email, senha] = req.body;
+            let {email, senha} = req.body;
 
             let dados = await login(email, senha);
 
@@ -22,3 +22,5 @@ endPoints.post('/usuario/login', async (req, resp) => {
             resp.send(err.message)
         }
 })
+
+export default endPoints;

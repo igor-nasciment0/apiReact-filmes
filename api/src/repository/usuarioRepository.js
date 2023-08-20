@@ -1,9 +1,9 @@
-import conexao from "./conexao"
+import conexao from "./conexao.js"
 
 export async function login(email, senha) {
     const sql = 
-    `SELECT ID_USUARIO  ID
-            NM_USUARIO  USUARIO  
+    `SELECT ID_USUARIO  ID,
+            NM_USUARIO  USUARIO,
             DS_EMAIL    EMAIL
        FROM TB_USUARIO
       WHERE DS_EMAIL    = ?

@@ -1,4 +1,4 @@
-import mysql from 'mysql2';
+import mysql from 'mysql2/promise';
 
 let config = {
     host: process.env.HOST,
@@ -8,5 +8,7 @@ let config = {
 };
 
 const conexao = await mysql.createConnection(config);
+
+console.log('BD CONECTADO');
 
 export default conexao;
