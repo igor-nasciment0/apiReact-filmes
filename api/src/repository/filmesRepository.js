@@ -76,3 +76,32 @@ export async function buscarPorID(id)
 
     return filme[0];
 }
+
+export async function deletarFilme(id) {
+    const sql = 
+    `DELETE FROM TB_FILME
+           WHERE ID_FILME = ?
+    `
+
+    let [resposta] = await conexao.query(sql, [id]);
+
+    return resposta;
+}
+
+export async function alterarFilme(id, newData) {
+    const sql =
+    `UPDATE TB_FILME
+        SET ID_USUARIO      = ?,
+            NM_FILME        = ?,
+            DS_SINOPSE      = ?,
+            VL_AVALIACAO    = ?,
+            DT_LANCAMENTO   = ?,
+            BT_DISPONIVEL   = ?,
+            IMG_FILME       = ?
+      WHERE ID_FILME        = ?
+    `
+
+    let resposta = conexao.query(sql, [newData.id_usuario, newData.nome, newData.sinopse, newData.avaliacao, newData.lancamento, newData.disponivel, newData.imagem, id]);
+
+    return resposta;
+}

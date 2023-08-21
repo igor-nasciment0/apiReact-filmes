@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { cadastrarFilme, inserirImagem, listarFilmes, listarPorNome, buscarPorID } from "../repository/filmesRepository.js";
+import { cadastrarFilme, inserirImagem, listarFilmes, listarPorNome, buscarPorID, deletarFilme, alterarFilme } from "../repository/filmesRepository.js";
 import multer from 'multer';
 
 const upload = multer({ dest: 'storage/capasFilmes'});
@@ -78,6 +78,33 @@ endpoints.get('/filme/:id', async (req, resp) => {
 
         resp.status(400).send(err.message);
 
+    }
+})
+
+endpoints.delete('/filme/:id', async (req, resp) => {
+    try {
+        
+        let id = req.params.id;
+        let resposta = await deletarFilme(id);
+        resp.send(resposta);
+
+    } catch (err) {
+        resp.status(400).send(err.message);
+    }
+})
+
+endpoints.put('/filme/:id', async (req, resp) => {
+    try {
+
+        let id = req.params.id;
+        let filmeData = req.body;
+        
+        let resposta = await alterarFilme(id, filmeData);
+
+        resp.send(resposta);
+        
+    } catch (err) {
+        resp.status(400).send(err.message);
     }
 })
 
