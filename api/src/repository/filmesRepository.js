@@ -24,3 +24,55 @@ export async function inserirImagem(imagem, id)
 
     return resposta;
 }
+
+export async function listarFilmes()
+{
+    const sql = 
+    `SELECT ID_FILME        id,
+            NM_FILME        nome,
+            VL_AVALIACAO    avaliacao,
+            DT_LANCAMENTO   dataLancamento,
+            BT_DISPONIVEL   disponivel
+       FROM TB_FILME 
+    `
+
+    let [filmes] = await conexao.query(sql);
+
+    return filmes;
+}
+
+export async function listarPorNome(nome)
+{
+    const sql = 
+    `SELECT ID_FILME        id,
+            NM_FILME        nome,
+            VL_AVALIACAO    avaliacao,
+            DT_LANCAMENTO   dataLancamento,
+            BT_DISPONIVEL   disponivel
+       FROM TB_FILME
+      WHERE NM_FILME        LIKE ? 
+    `
+
+    let [filmes] = await conexao.query(sql, [`%${nome}%`]);
+
+    return filmes;
+}
+
+export async function buscarPorID(id)
+{
+    const sql = 
+    `SELECT ID_FILME        id,
+            NM_FILME        nome,
+            DS_SINOPSE      sinopse,
+            VL_AVALIACAO    avaliacao,
+            DT_LANCAMENTO   dataLancamento,
+            BT_DISPONIVEL   disponivel,
+            IMG_FILME       imagem
+       FROM TB_FILME
+      WHERE ID_FILME = ?
+    `
+
+    let [filme] = await conexao.query(sql, [id]);
+
+    return filme[0];
+}
