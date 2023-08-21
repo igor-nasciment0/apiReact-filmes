@@ -101,7 +101,7 @@ export async function alterarFilme(id, newData) {
       WHERE ID_FILME        = ?
     `
 
-    let resposta = conexao.query(sql, [newData.id_usuario, newData.nome, newData.sinopse, newData.avaliacao, newData.lancamento, newData.disponivel, newData.imagem, id]);
+    let [resposta] = await conexao.query(sql, [newData.id_usuario, newData.nome, newData.sinopse, newData.avaliacao, newData.lancamento, newData.disponivel, newData.imagem, id]);
 
     return resposta;
 }
